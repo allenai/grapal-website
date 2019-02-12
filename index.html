@@ -1,0 +1,195 @@
+<!DOCTYPE html><html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="A public Graph Database for accessing Semantic Scholar's data.">
+        <meta name="google-site-verification" content="PGpulhsDPxlmRVIrLwU_rnAsqfqiAIc4vhTPQ4xFNgc">
+        <title>GrapAL</title>
+        <style>
+            html {
+                color: #2e414f;
+                font-family: 'helvetica neue', helvetica, arial, sans-serif;
+                line-height: 1.4;
+            }
+
+            h1, h2, h3 {
+                font-weight: bold;
+            }
+
+            * {
+                box-sizing: border-box;
+            }
+
+            html, 
+            body {
+                padding: 0;
+                margin: 0;
+            }
+
+            header {
+                background: #1e303c;
+                border-top: 2px solid #fdea65;
+                color: #fff;
+            }
+
+            .content {
+                max-width: 900px;
+                margin: 0 auto;
+                padding: 5px;
+            }
+            header .content {
+                display: flex;
+                align-self: middle;
+                padding-top: 5px;
+                padding-bottom: 5px;
+            }
+
+            a {
+                color: #237aaa;
+                text-decoration: none;
+            }
+            a:hover {
+                text-decoration: underline;
+            }
+
+            h1 {
+                border-bottom: 1px solid #e0e0e0;
+                font-size: 30px;
+                padding-bottom: 10px;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+            h3 {
+                font-size: 16px;
+            }
+            footer {
+                border-top: 1px solid #e0e0e0;
+                padding-top: 20px;
+                margin-top: 20px;
+                display: flex;
+                flex-flow: row nowrap;
+                justify-content: space-between;
+                align-content: center;
+            }
+            code {
+                font-size: 16px;
+            }
+            pre {
+                margin-left: 20px;
+                font-size: 16px;
+                white-space: pre-wrap;
+                background: #f4f4f4;
+                padding: 10px;
+            }
+
+        </style>
+    </head>
+    <body>
+        <header>
+            <div class="content"><a href=""><img src="logo.png" alt="grapal logo" width=20% height=auto></a></div>
+        </header>
+        <div class="content">
+            <h1>GrapAL: A Graph DB of Semantic Scholar's Literature Graph</h1>
+
+            <p>Ask questions about academic literature using the data in Semantic Scholar through simple pattern-matching queries. Powered by <a href="https://neo4j.com/docs/operations-manual/current/" target="_blank">Neo4j</a> (uses <a href="http://www.gnu.org/licenses/quick-guide-gplv3.html" target="_blank">GPL v3</a>), with the <a href="https://neo4j.com/developer/cypher-query-language/" target="_blank">Cypher Query Language</a>.</p>
+
+            <h3><a href="http://grapal.allenai.org:7474/browser/">Explore the Neo4j Browser of GrapAL</a></h3>
+
+            <h2>GrapAL Basics</h2>
+
+            <p>For a simple intro to Cypher see Neo4j's <a href="https://neo4j.com/developer/cypher-query-language/" target="_blank">Cypher Basics I</a></p>
+
+            <p>For an overview of features, see Neo4j's <a href="https://neo4j.com/docs/cypher-refcard/current/" target="_blank">Cypher Refcard</a></p>
+
+            <p>Put simply, Cypher accepts queries that match the pattern of data in the graph.</p>
+            <h3>Node types</h3>
+            <ul>
+                <li><b>Affiliation</b>: Usually some form of institution (not normalized or queryable by location).</li>
+                    <ul><li>text: a long string of the full affiliation</li></ul>
+                <li><b>Author</b></li>
+                <ul>
+                    <li>author_id: standard integer author id as can be found in the URL of an author page on <a href="https://www.semanticscholar.org/" target="_blank">semanticscholar.org</a></li>
+                    <li>first: string of an author's first name</li>
+                    <li>middle: array of strings for an author's middle name(s) (if any)</li>
+                    <li>last: string of an author's last name</li>
+                </ul>
+                <li><b>Entity</b></li>
+                <ul>
+                    <li>entity_id: standard integer entity id as can be found in the URL of an entity page on <a href="https://www.semanticscholar.org/" target="_blank">semanticscholar.org</a></li>
+                    <li>name: string of an entity name</li>
+                </ul>
+                <li><b>Paper</b></li>
+                <ul>
+                    <li>paper_id: standard string paper id as can be found in the URL of a paper page on <a href="https://www.semanticscholar.org/" target="_blank">semanticscholar.org</a></li>
+                    <li>title: string of a paper title</li>
+                    <li>year: integer of the year a paper was published</li>
+                </ul>
+                <li><b>Relation_Instance</b>: a simple node acting as a hyperedge; connects a Relation_Type and the entities it relates</li>
+                <li><b>Relation_Type</b>: the type of relationship two entities have (i.e. 'is_child_of')</li>
+                <ul>
+                    <li>relation_type: string of a relation type</li>
+                    <li>relation_subtype: string of a relation's subtype if one exists (i.e. 'is_child_of' subtype is 'isa')</li>
+                </ul>
+                <li><b>Venue</b>: journal, conference, or institution in which a paper is published</li>
+                <ul>
+                    <li>text: string of a venue</li>
+                </ul>
+            </ul>
+            <h3>Edge types</h3>
+            <ul>
+                <li><b>AFFILIATED_WITH</b>: relationship between an <b>Author</b> or <b>Paper</b> and an <b>Affiliation</b></li>
+                    <ul><li>year: integer year the affiliation existed (based on when a given paper was published)</li></ul>
+                <li><b>APPEARS_IN</b>: relationship between a <b>Paper</b> and a <b>Venue</b></li>
+                <li><b>AUTHORS</b>: relationship between an <b>Author</b> and a <b>Paper</b></li>
+                <ul>
+                    <li>position: integer for an <b>Author</b>'s position on a <b>Paper</b></li>
+                </ul>
+                <li><b>CITES</b>: citation relationship between a <b>Paper</b> and another <b>Paper</b></li>
+                <li><b>MENTIONS</b>: relationship between a <b>Paper</b> and an <b>Entity</b></li>
+                <ul>
+                    <li>confidence: float representing confidence of an <b>Entity</b> in a <b>Paper</b></li>
+                    <li>salience: float representing salience of an <b>Entity</b> in a <b>Paper</b></li>
+                </ul>
+                <li><b>MENTIONS_RELATION</b>: relationship between a <b>Paper</b> and a <b>Relation_Instance</b></li>
+                <ul>
+                    <li>text: string of a venue</li>
+                </ul>
+                <li><b>WITH_ENTITY</b>: relationship between a <b>Relation_Instance</b> and an <b>Entity</b></li>
+                <li><b>WITH_RELATIONSHIP</b>: relationship between a <b>Relation_Instance</b> and a <b>Relation_Type</b></li>
+
+            </ul>
+
+
+            <h3>Basic queries</h3>
+            <pre>// returns a single node of any type (limited to 1 for performance)
+MATCH (a) RETURN a LIMIT 1</pre>
+            <pre>// returns a single node of type Author
+MATCH (a:Author) RETURN a LIMIT 1</pre>
+            <pre>// returns the path between 10 Author/Paper nodes
+MATCH path=((a:Author)-->(p:Paper)) RETURN path LIMIT 10</pre>
+            <pre>// returns a nodes of type Author and Paper with edge type specified
+MATCH (a:Author)-[:AUTHORS]->(p:Paper) RETURN * LIMIT 10</pre>
+            <pre>// returns 10 Author nodes that were the first author on a Paper
+// Note that querying on edge properties is very expensive 
+MATCH (a:Author)-[auth:AUTHORS {position: 1}]->(p:Paper) RETURN a LIMIT 10</pre>
+            <pre>// returns Author nodes with the last name 'Berendse'
+MATCH (a:Author {last: 'Berendse'}) RETURN *</pre>
+            <p>We can also use Author IDs found on <a href="https://semanticscholar.org" target="_blank">semanticscholar.org</a> by finding an Author’s page and copy the ID from the URL.</p>
+            <p>Here's the query for all shortest paths between Noah Smith [URL: <code>www.semanticscholar.org/author/Noah-A.-Smith/1685669</code>, so their ID is 1685669] and Mark Steedman [URL: <code>www.semanticscholar.org/author/Mark-Steedman/1715920</code>, so their ID is 1715920].</p>
+
+            <pre>match p=allShortestPaths((a:Author {author_id:'1685669'})-[*0..4]-(b:Author {author_id: '1715920'})) return p</pre>
+
+            <footer>
+                <div>
+                    Powered by <a href="https://www.semanticscholar.org">Semantic Scholar</a> &amp; <a href="https://neo4j.com">Neo4j</a> &bull; Built by <a href="http://allenai.org">AI2</a>
+                </div>
+                <div>
+                    <a href="https://allenai.org/terms.html" target="_blank">Terms & Conditions</a> |
+                    <a href="https://allenai.org/privacy-policy.html" target="_blank">Privacy Policy</a>
+                </div>
+            </footer>
+        </div>
+       <script type="text/javascript">console.log('             __\n            / _) rawr\n     .-^^^-/ /\n __/       /\n<__.|_|-|_|')</script>
+    </body>
+</html>

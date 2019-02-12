@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple JQuery HTTP Endpoint App</title>
+    <meta charset="utf-8">
+    <style>
+		#statements {
+		    height:40px;
+		    font-size:18px;
+		    width: 800px;
+		    font-family : "Courier New", Courier, monospace;
+		}
+		div.ex2 {
+			max-width: 800px;
+			border: 12px solid #ffffff;
+			overflow-wrap: break-word;
+			font-family : "Courier New", Courier, monospace;
+		}
+		h1 {
+			font-family: sans-serif;
+		}
+
+	</style>
+</head>
+<body>
+
+<h1>Simple Cypher HTTP Endpoint App</h1>
+<form id="my-form">
+    <textarea type="text" id="statements" name="statements" placeholder="statements"></textarea>
+
+    <button type="submit">Submit</button>
+</form>
+
+<div id="response">
+</div>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+    (function($){
+        function processForm( e ){
+        	document.getElementById("response").innerHTML = "";
+        	$.ajax({
+			    type: "POST",
+			    url: "http://grapal.allenai.org:7474/db/data/transaction/commit",
+			    dataType: "json",
+			    contentType: "application/json;charset=UTF-8",
+			    data: "{\"statements\": [{\"statement\": \"" + $("#statements")[0]['value']+"\"}]}",
+			    success: function (data, textStatus, jqXHR) {
+			    	let res = data['results'][0]['data'];
+			    	for (var i = 0; i < res.length; i++) {
+			    		console.log(JSON.stringify(res[i]['row']));
+						$('#response').append("<div class=\"ex2\">"+JSON.stringify(res[i]['row'])+"</div>");
+			    	}
+			    },
+			    error: function (jqXHR, textStatus, errorThrown) {
+			        console.log( errorThrown );
+			    }
+			});
+            e.preventDefault();
+        }
+
+        $('#my-form').submit( processForm );
+    })(jQuery);
+</script>
+</body>
+</html>
+
