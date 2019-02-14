@@ -108,6 +108,11 @@
                 background-color: #111111;
             }
 
+            .gist-file{
+                width: 84%;
+                margin-left: 8%;
+            }
+
 
         </style>
     </head>
@@ -115,7 +120,10 @@
         <header>
             <div class="content">
                 <ul class="nav">
-                  <li><a href=#basics>Basics</a></li>
+                    <li><a href=#schema>Schema</a></li>
+                    <li><a href=#basics>Cypher Basics</a></li>
+                    <li><a href=#examples>Example Queries</a></li>
+
                 </ul>
             </div>
         </header>
@@ -126,13 +134,10 @@
 
             <h3><a href="http://grapal.allenai.org:7474/browser/">Explore the Neo4j Browser of GrapAL</a></h3>
 
-            <h2 id="basics">GrapAL Basics</h2>
+            <h2 id="schema">Schema</h2>
 
-            <p>For a simple intro to Cypher see Neo4j's <a href="https://neo4j.com/developer/cypher-query-language/" target="_blank">Cypher Basics I</a></p>
-
-            <p>For an overview of features, see Neo4j's <a href="https://neo4j.com/docs/cypher-refcard/current/" target="_blank">Cypher Refcard</a></p>
-
-            <p>Put simply, Cypher accepts queries that match the pattern of data in the graph.</p>
+            <img width=90% height=auto src="https://docs.google.com/drawings/d/e/2PACX-1vSQufjMW0fqxfYTGMW-hnCyKTlpggDHO4eZQc-IHRxsPSe4ydabDw3roSH7LfBDIjHpGE_Knf1CkMFt/pub?w=1340&amp;h=492">
+            <p>[overview of the schema. * indicates indexed property.]</p>
             <h3>Node types</h3>
             <ul>
                 <li><b>Affiliation</b>: Usually some form of institution (not normalized or queryable by location).</li>
@@ -141,7 +146,7 @@
                 <ul>
                     <li>author_id: standard integer author id as can be found in the URL of an author page on <a href="https://www.semanticscholar.org/" target="_blank">semanticscholar.org</a></li>
                     <li>first: string of an author's first name</li>
-                    <li>middle: array of strings for an author's middle name(s) (if any)</li>
+                    <li>middle: string of an author's middle names (currently formatted as "['middle_name1', 'middle_name2']", but will be an actual array in the future)</li>
                     <li>last: string of an author's last name</li>
                 </ul>
                 <li><b>Entity</b></li>
@@ -190,25 +195,29 @@
 
             </ul>
 
+            <h2 id="basics">Cypher Basics</h2>
+
+            <p>For a simple intro to Cypher see Neo4j's <a href="https://neo4j.com/developer/cypher-query-language/" target="_blank">Cypher Basics I</a></p>
+
+            <p>For an overview of features, see Neo4j's <a href="https://neo4j.com/docs/cypher-refcard/current/" target="_blank">Cypher Refcard</a></p>
+
+            <p>Put simply, Cypher accepts queries that match the pattern of data in the graph.</p>
 
             <h3>Basic queries</h3>
-            <pre>// returns a single node of any type (limited to 1 for performance)
-MATCH (a) RETURN a LIMIT 1</pre>
-            <pre>// returns a single node of type Author
-MATCH (a:Author) RETURN a LIMIT 1</pre>
-            <pre>// returns the path between 10 Author/Paper nodes
-MATCH path=((a:Author)-->(p:Paper)) RETURN path LIMIT 10</pre>
-            <pre>// returns a nodes of type Author and Paper with edge type specified
-MATCH (a:Author)-[:AUTHORS]->(p:Paper) RETURN * LIMIT 10</pre>
-            <pre>// returns 10 Author nodes that were the first author on a Paper
-// Note that querying on edge properties is very expensive 
-MATCH (a:Author)-[auth:AUTHORS {position: 1}]->(p:Paper) RETURN a LIMIT 10</pre>
-            <pre>// returns Author nodes with the last name 'Berendse'
-MATCH (a:Author {last: 'Berendse'}) RETURN *</pre>
-            <p>We can also use Author IDs found on <a href="https://semanticscholar.org" target="_blank">semanticscholar.org</a> by finding an Author’s page and copy the ID from the URL.</p>
-            <p>Here's the query for all shortest paths between Noah Smith [URL: <code>www.semanticscholar.org/author/Noah-A.-Smith/1685669</code>, so their ID is 1685669] and Mark Steedman [URL: <code>www.semanticscholar.org/author/Mark-Steedman/1715920</code>, so their ID is 1715920].</p>
+                <script src="https://gist.github.com/chrstnb/24f0a83dfc118fbfaee5d285d8ecb912.js"></script>
 
-            <pre>match p=allShortestPaths((a:Author {author_id:'1685669'})-[*0..4]-(b:Author {author_id: '1715920'})) return p</pre>
+            <h2 id="examples">Example Queries</h2>
+            <div class="example">
+<!--                 <p>The following finds the shortest path between two researchers based on their coauthors.</p>
+ -->                <script class="example" src="https://gist.github.com/chrstnb/95aa23f64b77a1339451c853fa330a14.js"></script>
+                <script class="example" src="https://gist.github.com/chrstnb/d9228349b68ff2e8f9c468ba745e0772.js"></script>
+                <script src="https://gist.github.com/chrstnb/4d692c7c4687ecbb988ff4a6c5091363.js"></script>
+                <script src="https://gist.github.com/chrstnb/8d97cd14822d6135fe843594628fe45d.js"></script>
+                <script src="https://gist.github.com/chrstnb/b6d7f80717f2fc1f32c75199c8df2efb.js"></script>
+                <script src="https://gist.github.com/chrstnb/6c4f85988ad372c7425f9eeead72f0db.js"></script>
+                <script src="https://gist.github.com/chrstnb/b22ea0eb2a9cb9099cf11fc13ca24981.js"></script>
+                <script src="https://gist.github.com/chrstnb/9355fbdfbdffcf3cf99241aeebb124f4.js"></script>
+            </div>
 
             <footer>
                 <div>
@@ -217,6 +226,7 @@ MATCH (a:Author {last: 'Berendse'}) RETURN *</pre>
                 <div>
                     <a href="https://allenai.org/terms.html" target="_blank">Terms & Conditions</a> |
                     <a href="https://allenai.org/privacy-policy.html" target="_blank">Privacy Policy</a>
+
                 </div>
             </footer>
         </div>
