@@ -42,7 +42,7 @@
         	document.getElementById("response").innerHTML = "";
         	$.ajax({
 			    type: "POST",
-			    url: "https://grapal.allenai.org:7374/db/data/transaction/commit",
+			    url: "https://grapal.allenai.org:7473/db/data/transaction/commit",
 			    dataType: "json",
 			    contentType: "application/json;charset=UTF-8",
 			    data: "{\"statements\": [{\"statement\": \"" + $("#statements")[0]['value']+"\"}]}",
