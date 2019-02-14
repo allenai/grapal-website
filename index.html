@@ -83,20 +83,50 @@
                 padding: 10px;
             }
 
+            .nav {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                float:right;
+                width:100%;
+            }
+
+            .nav li {
+                float: left;
+            }
+
+            .nav li a {
+                display: block;
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+
+            .nav li a:hover {
+                background-color: #111111;
+            }
+
+
         </style>
     </head>
     <body>
         <header>
-            <div class="content"><a href=""><img src="logo.png" alt="grapal logo" width=20% height=auto></a></div>
+            <div class="content">
+                <ul class="nav">
+                  <li><a href=#basics>Basics</a></li>
+                </ul>
+            </div>
         </header>
         <div class="content">
-            <h1>GrapAL: A Graph Database of Semantic Scholar's Literature Graph</h1>
+            <h1>GrapAL: A Graph DB of Semantic Scholar's Literature Graph</h1>
 
             <p>Ask questions about academic literature using the data in Semantic Scholar through simple pattern-matching queries. Powered by <a href="https://neo4j.com/docs/operations-manual/current/" target="_blank">Neo4j</a> (uses <a href="http://www.gnu.org/licenses/quick-guide-gplv3.html" target="_blank">GPL v3</a>), with the <a href="https://neo4j.com/developer/cypher-query-language/" target="_blank">Cypher Query Language</a>.</p>
 
             <h3><a href="http://grapal.allenai.org:7474/browser/">Explore the Neo4j Browser of GrapAL</a></h3>
 
-            <h2>GrapAL Basics</h2>
+            <h2 id="basics">GrapAL Basics</h2>
 
             <p>For a simple intro to Cypher see Neo4j's <a href="https://neo4j.com/developer/cypher-query-language/" target="_blank">Cypher Basics I</a></p>
 
