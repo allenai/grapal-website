@@ -133,7 +133,8 @@
                     <li><a href=#schema>Schema</a></li>
                     <li><a href=#basics>Cypher Basics</a></li>
                     <li><a href=#examples>Example Queries</a></li>
-
+                    <li><a href=#endpoints>Endpoints</a></li>
+                    <li><a href=#issues>Issues</a></li>
                 </ul>
             </div>
         </header>
@@ -252,6 +253,26 @@
                 <h3>Authors who have cited a given author most</h3>
                 <p>This returns the authors who have cited a given author the most. Note that this contians a cartesian product & could probably be written better.</p>
                 <script src="https://gist.github.com/chrstnb/9355fbdfbdffcf3cf99241aeebb124f4.js"></script>
+
+
+
+                <h2 id="endpoints">Endpoints</h2>
+                <p>GrapAL can be queried in several ways. </p>
+                <h3>Interactive browser</h3>
+                <p>Neo4j's interactive browser is available at <a href="http://grapal.allenai.org:7474/browser/">grapal.allenai.org:7474/browser</a>. It produces neat visualizations and allows users to click around and explore the graph.</p>
+                <img width=80% height=auto src="shortest_path.png" alt="Shortest paths between Amandalynne Paullada and Marti Hearst">
+                <p>[All shortest paths between Amandalynne Paullada and Marti Hearst. Query <a href="https://gist.github.com/chrstnb/310990bcf17f90d246105961f2233455" target="_blank">here</a>.]
+
+                <h3>HTTP endpoint</h3>
+                <p>Documentation of the Neo4j HTTP API available <a href="https://neo4j.com/docs/http-api/current/http-api/introduction/" target="_blank">here</a>. The HTTP endpoint allows for faster queries that return bulk JSON data. Note that <i>Cypher queries may not include line breaks</i> as many of the above examples do.</p>
+                <p>We have an (imperfect) example javascript app using ajax at <a href="http://grapal.allenai.org/app/" target="_blank">grapal.allenai.org/app/</a> with the source code available <a href="https://github.com/allenai/grapal-website/blob/master/app/index.html#L49" target="_blank">here</a>.</p>
+
+                <h3>Language drivers</h3>
+                <p>Finally, Neo4j has quite a few language drivers with more details <a href="https://neo4j.com/docs/driver-manual/1.7/get-started/" target="_blank">here</a>. The bolt address for GrapAL is <code>grapal.allenai.org:7687</code>.</p>
+
+
+                <h2 id="schema">Schema</h2>
+
             </div>
 
             <footer>
