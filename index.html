@@ -110,8 +110,8 @@
             }
 
             .gist-file{
-                width: 84%;
-                margin-left: 8%;
+                width: 88%;
+                margin-left: 6%;
             }
 
 
@@ -218,14 +218,36 @@
 
             <h2 id="examples">Example Queries</h2>
             <div class="example">
-<!--                 <p>The following finds the shortest path between two researchers based on their coauthors.</p>
- -->                <script class="example" src="https://gist.github.com/chrstnb/95aa23f64b77a1339451c853fa330a14.js"></script>
+                <h3>Shortest path between researchers</h3>
+                <p>The following finds the shortest path between two researchers based on their coauthors using the shortest path function. We could alternatively use <code>allShortestPaths</code> to return more than one (if they exist). We can alternatively use researcher IDs based on the URL of their Semantic Scholar page (<a href="https://www.semanticscholar.org/author/Swabha-Swayamdipta/2705113" target="_blank">Swabha Swayamdipta</a>: 2705113), with <code>(a:Author {author_id: 2705113})</code>.</p>
+                <script class="example" src="https://gist.github.com/chrstnb/95aa23f64b77a1339451c853fa330a14.js"></script>
+                
+                <h3>Authors publishing the most on an entity</h3>
+                <p>The following finds the  authors who have published the most on "Relationship extraction" since 2013. This query is explained further in the <a href="https://www.youtube.com/watch?v=1ivX9sHw2RU" target="_blank">demo video</a>. The second query is how to find the canonicalized name of an entity based on regular expression string matching.</p>
                 <script class="example" src="https://gist.github.com/chrstnb/d9228349b68ff2e8f9c468ba745e0772.js"></script>
+                
+                <h3>Papers discussing multiple entities</h3>
+                <p>This query gives us papers that mention both contraint programming and NLP. A more interesting query could be accomplished based on salience, which lives on <code>:MENTIONS</code> edges.</p>
                 <script src="https://gist.github.com/chrstnb/4d692c7c4687ecbb988ff4a6c5091363.js"></script>
+
+                <h3>Impact of one biomedical entity on another</h3>
+                <p>The following gives us the shortest path between the entities "Estrogen Receptors" and "Arimidex" based on relationships. It unwinds the resulting path to pull in the type of relation that exists between each pair of related nodes in the shortest path.</p>
                 <script src="https://gist.github.com/chrstnb/8d97cd14822d6135fe843594628fe45d.js"></script>
+
+                <h3>Citation impact of one conference on another</h3>
+                <p>This query returns the number of papers in one conference cited by those in another. This could be extended to different domains, affiliations, or authors. We use regular expression matching because venues are non-deduplicated strings.</p>
                 <script src="https://gist.github.com/chrstnb/b6d7f80717f2fc1f32c75199c8df2efb.js"></script>
+
+                <h3>Shortest path excluding certain nodes</h3>
+                <p>This query returns authors who cite a given author who that author has not cited. This is perhaps a means of finding collaborators, but at the very least an interesting example of multiple aggregations.</p>
                 <script src="https://gist.github.com/chrstnb/6c4f85988ad372c7425f9eeead72f0db.js"></script>
+
+                <h3>Researchers who cite you who you've not cited</h3>
+                <p>Occasionally a shortest path query will return a path that fails to provide useful information (i.e. two papers that both mention "Experiments"). If this happens, creating a simple list of excluded nodes or constraining the path to only paths longer than some number of edges should provide more interesting results.</p>
                 <script src="https://gist.github.com/chrstnb/b22ea0eb2a9cb9099cf11fc13ca24981.js"></script>
+
+                <h3>Authors who have cited a given author most</h3>
+                <p>This returns the authors who have cited a given author the most. Note that this contians a cartesian product & could probably be written better.</p>
                 <script src="https://gist.github.com/chrstnb/9355fbdfbdffcf3cf99241aeebb124f4.js"></script>
             </div>
 
@@ -240,6 +262,5 @@
                 </div>
             </footer>
         </div>
-       <script type="text/javascript">console.log('             __\n            / _) rawr\n     .-^^^-/ /\n __/       /\n<__.|_|-|_|')</script>
     </body>
 </html>
