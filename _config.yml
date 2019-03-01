@@ -1,1 +1,9 @@
+title: GrapAL
+description: Write simple queries to answer uniquely interesting questions about academic literature
+
+google_analytics: UA-134600240-1
+
+grapal_browser_url: http://grapal.allenai.org:7474/browser/
+paper_url: https://arxiv.org/abs/1902.05170
+demo_url: https://youtu.be/1ivX9sHw2RU
 theme: jekyll-theme-cayman
