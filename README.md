@@ -145,7 +145,7 @@ ORDER BY count_c DESC
 GrapAL Schema
 ---------
 A brief overview of the schema of GrapAL.
-![GrapAL Schema: Graph of nodes and edges outlined in text below](http://docs.google.com/drawings/d/e/2PACX-1vSQufjMW0fqxfYTGMW-hnCyKTlpggDHO4eZQc-IHRxsPSe4ydabDw3roSH7LfBDIjHpGE_Knf1CkMFt/pub?w=670&h=246 overview of schema. *indicates indexed property)
+![GrapAL Schema: Graph of nodes and edges outlined in text below](schema.png overview of schema. *indicates indexed property)
 
 ### Node types
 - **Affiliation**: Usually some form of institution (not normalized or queryable by location).
