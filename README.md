@@ -145,7 +145,7 @@ ORDER BY count_c DESC
 GrapAL Schema
 ---------
 A brief overview of the schema of GrapAL.
-![GrapAL Schema: Graph of nodes and edges outlined in text below](schema.png)
+![GrapAL Schema: Graph of nodes and edges outlined in text below](https://allenai.github.io/grapal-website/schema.png)
 overview of the schema where * indicates indexed property.
 
 ### Node types
@@ -253,7 +253,7 @@ In this section, we outline different means of accessing/interacting with GrapAL
 
 ### Interactive Browser
 Neo4j's interactive browser is available at [grapal.allenai.org:7474/browser](grapal.allenai.org:7474/browser). It produces neat visualizations and allows users to click around and explore the graph.
-![Visual of the shortest paths between Amandalynne Paullada and Marti Hearst](shortest_path.png)
+![Visual of the shortest paths between Amandalynne Paullada and Marti Hearst](https://allenai.github.io/grapal-website/shortest_path.png)
 all shortest paths between Amandalynne Paullada and Marti Hearst
 
 
