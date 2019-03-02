@@ -145,7 +145,8 @@ ORDER BY count_c DESC
 GrapAL Schema
 ---------
 A brief overview of the schema of GrapAL.
-![GrapAL Schema: Graph of nodes and edges outlined in text below](schema.png overview of schema. *indicates indexed property)
+![GrapAL Schema: Graph of nodes and edges outlined in text below](schema.png)
+overview of the schema where * indicates indexed property.
 
 ### Node types
 - **Affiliation**: Usually some form of institution (not normalized or queryable by location).
@@ -252,6 +253,9 @@ In this section, we outline different means of accessing/interacting with GrapAL
 
 ### Interactive Browser
 Neo4j's interactive browser is available at [grapal.allenai.org:7474/browser](grapal.allenai.org:7474/browser). It produces neat visualizations and allows users to click around and explore the graph.
+![Visual of the shortest paths between Amandalynne Paullada and Marti Hearst](shortest_path.png)
+all shortest paths between Amandalynne Paullada and Marti Hearst
+
 
 ### HTTP Endpoint
 Documentation of the Neo4j HTTP API available [here](https://neo4j.com/docs/http-api/current/http-api/introduction/). The HTTP endpoint allows for faster queries that return bulk JSON data. Note that _Cypher queries may not include line breaks_ as many of the above examples do.
