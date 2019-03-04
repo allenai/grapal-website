@@ -268,6 +268,7 @@ Finally, Neo4j has quite a few language drivers with more details [here](https:/
 FAQ
 ---------
 Q: Does GrapAL contain all data from [SemanticScholar.org](SemanticScholar.org)?
+
 A: GrapAL is a static snapshot of Semantic Scholar, updated at a monthly cadence. The current snapshot is from 1/28/2019.
 
 Contact
