@@ -1,0 +1,19 @@
+nav:
+
+- title: Example Queries
+  url: examples.html
+
+- title: Schema
+  url: schema.html
+
+- title: Cypher Basics
+  url: basics.html
+
+- title: Endpoints
+  url: endpoints.html
+
+- title: FAQ
+  url: faq.html
+
+- title: Contact
+  url: contact.html
