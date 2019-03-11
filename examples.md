@@ -6,6 +6,8 @@ Example Queries
 ---------
 We'll outline some interesting use cases of GrapAL; to make them your own simply replace the example authors, entities, or papers with your own!
 
+Copy these over into the [interactive browser](http://grapal.allenai.org:7474/browser) to visualize the results and explore the graph further!
+
 ### Shortest path between researchers
 The following finds the shortest path between two researchers based on their coauthors using the shortest path function. We could alternatively use `allShortestPaths` to return more than one (if they exist). We can alternatively use researcher IDs based on the URL of their Semantic Scholar page ([Swabha Swayamdipta](https://www.semanticscholar.org/author/Swabha-Swayamdipta/2705113): `2705113`), with `(a:Author {author_id: 2705113})`.
 
