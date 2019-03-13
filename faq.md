@@ -4,7 +4,7 @@ title: FAQ
 ---
 FAQ
 ---------
-Q: Why is the [browser](http://grapal.allenai.org:7474/browser/) prompting me to use `server connect` and saying the databse is not available?
+Q: Why is the [browser](http://grapal.allenai.org:7474/browser/) prompting me to use `server connect` and saying the database is not available?
 
 A: GrapAL is not accessible on wifi networks that block VPN access. We are working to resolve the issue, however for now try accessing it on a different network.
 
