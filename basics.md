@@ -9,7 +9,7 @@ In this section, we'll give a brief introduction to using Cypher and provide res
 - [Cypher Basics 1](https://neo4j.com/developer/cypher-query-language/): simple intro to Cypher
 - [Cypher Refacrd](https://neo4j.com/docs/cypher-refcard/current/): a handy overview of features
 
-Try these queries out in the [interactive browser](http://grapal.allenai.org:7474/browser) to visualize the results and explore the graph further!
+Try these queries out in the [interactive browser](https://grapal.allenai.org:7473/browser) to visualize the results and explore the graph further!
 
 
 To begin by fetching an arbitrary node, we would run:

@@ -7,7 +7,7 @@ Endpoints
 In this section, we outline different means of accessing/interacting with GrapAL.
 
 ### Interactive Browser
-Neo4j's interactive browser is available at [grapal.allenai.org:7474/browser](grapal.allenai.org:7474/browser). It produces neat visualizations and allows users to click around and explore the graph.
+Neo4j's interactive browser is available at [https://grapal.allenai.org:7473/browser](https://grapal.allenai.org:7473/browser). It produces neat visualizations and allows users to click around and explore the graph.
 ![Visual of the shortest paths between Amandalynne Paullada and Marti Hearst](https://allenai.github.io/grapal-website/assets/images/shortest_path.png)
 all shortest paths between Amandalynne Paullada and Marti Hearst
 

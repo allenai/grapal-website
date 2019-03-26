@@ -9,7 +9,7 @@ The easiest way to get started with GrapAL is through the interactive browser, w
 
 ![Visual of the shortest paths between Swabha Swayamdipta and Regina Barzilay](https://allenai.github.io/grapal-website/assets/images/browser-example.png)
 
-For starters, copy and paste the following query into the [interactive browser](http://grapal.allenai.org:7474/browser):
+For starters, copy and paste the following query into the [interactive browser](https://grapal.allenai.org:7473/browser):
 ```
 MATCH p=shortestPath((a:Author)-[:AUTHORS*0..6]-(b:Author)) 
 WHERE a.first = "Swabha" 
