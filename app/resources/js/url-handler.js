@@ -17,7 +17,7 @@ function getQueryStringValue (key) {
 		var stmt = decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
 		return stmt;
 } 
-$("#statements").on("change keyup paste", function() {
+$("#statements").on("change paste", function() {
     var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?query=' + $("#statements")[0]['value'];
 	window.history.pushState({ path: newurl }, '', newurl);
 	document.getElementById('ascii-table').innerHTML = "";
