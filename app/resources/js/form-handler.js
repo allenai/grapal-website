@@ -67,3 +67,11 @@ $(document).ready(function() {
         }
 	}); 
 });
+
+$("#statements").on("change keyup paste", function() {
+    var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?query=' + $("#statements")[0]['value'];
+	window.history.pushState({ path: newurl }, '', newurl);
+	if ($("#statements")[0]['value'] === "")  {
+		document.getElementById('ascii-table').innerHTML = "";
+	}
+});
