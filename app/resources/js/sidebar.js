@@ -1,4 +1,5 @@
 var url = window.location.protocol + "//" + window.location.host + window.location.pathname + "/examples";
+console.log(url);
 $.get(url, function(data) {
    $(data).find("li > a").each(function() {
    		var fileName = $(this).attr("href");
