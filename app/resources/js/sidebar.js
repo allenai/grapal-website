@@ -1,3 +1,4 @@
+var url = window.location.protocol + "//" + window.location.host + window.location.pathname + "/examples";
 $.get('examples', function(data) {
    $(data).find("li > a").each(function() {
    		var fileName = $(this).attr("href");
@@ -9,9 +10,7 @@ $.get('examples', function(data) {
 			a.innerHTML = format_sidebar_strs(a_id);
 			$("#query-list").append(a);
 			$("#" + a_id).click(function(e) {
-				var url = window.location.protocol + "//" + window.location.host + window.location.pathname + "/examples/" + fileName;
-				$.get(url, function(data) {
-					console.log(window.location.protocol + "//" + window.location.host + window.location.pathname);
+				$.get(url + "/" + fileName, function(data) {
 					$("#statements").val(data);
 					$("#statements").css("height",($("#statements")[0].scrollHeight) + "px");
 					var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?example=' + a_id;
