@@ -6,7 +6,8 @@ $(document).ready(function() {
 		$("#statements").css("height",($("#statements")[0].scrollHeight) + "px");
 	} else if (!(getQueryStringValue("example") == "")) {
 		var type = getQueryStringValue("example");
-		$.get("examples/" + type + ".cql", function(data) {
+		var url = window.location.protocol + "//" + window.location.host + window.location.pathname + "/examples/" + type + ".cql";
+		$.get(url, function(data) {
 			$("#statements").val(data);
 			$("#statements").css("height",($("#statements")[0].scrollHeight) + "px");
 		});

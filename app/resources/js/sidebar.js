@@ -9,8 +9,9 @@ $.get('examples', function(data) {
 			a.innerHTML = format_sidebar_strs(a_id);
 			$("#query-list").append(a);
 			$("#" + a_id).click(function(e) {
-				$.get("examples/" + fileName, function(data) {
-					console.log(data);
+				var url = window.location.protocol + "//" + window.location.host + window.location.pathname + "/examples/" + fileName;
+				$.get(url, function(data) {
+					console.log(window.location.protocol + "//" + window.location.host + window.location.pathname);
 					$("#statements").val(data);
 					$("#statements").css("height",($("#statements")[0].scrollHeight) + "px");
 					var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?example=' + a_id;
