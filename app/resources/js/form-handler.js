@@ -1,7 +1,13 @@
 function load(items) {
     var output = AsciiTable.table(items)
     document.getElementById('ascii-table').innerHTML = output
-    console.log(output)
+ }
+
+ function handleDownload(data) {
+	data =  JSON.stringify(data);
+	var url = URL.createObjectURL( new Blob( [data], {type:'text/json'} ) );
+    $("#download").attr("href", url);
+    $("#download").css("display", "");
  }
 
 (function($){
@@ -19,24 +25,23 @@ function load(items) {
 		    contentType: "application/json;charset=UTF-8",
 		    data: "{\"statements\": [{\"statement\": \"" + stmt +"\"}]}",
 		    success: function (data, textStatus, jqXHR) {
-		    	console.log(data);
 		    	let errors = data['errors'];
-		    	console.log(errors);
 		    	if (errors.length > 0) {
 		    		let headers = ["code", "message"];
 		    		let body =[];
 		    		body.push(errors[0]['code']);
 		    		body.push(errors[0]['message']);
 		    		load([headers, body]);
+		    		handleDownload([headers, body]);
 		    	} else {
 			    	let res = data['results'][0]['data'];
-			    	console.log(data);
 					let final = [];
 					final.push(data['results'][0]['columns'])
 			    	for (var i = 0; i < res.length; i++) {
 						final.push(res[i]['row']);
 			    	}
 			    	load(final);
+			    	handleDownload(data['results'][0]);
 			    }
 		    },
 		    error: function (jqXHR, textStatus, errorThrown) {
@@ -72,6 +77,7 @@ $("#statements").on("change keyup paste", function() {
     var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?query=' + $("#statements")[0]['value'];
 	window.history.pushState({ path: newurl }, '', newurl);
 	if ($("#statements")[0]['value'] === "")  {
-		document.getElementById('ascii-table').innerHTML = "";
+		$('#ascii-table').empty();
+		$("#download").css("display", "none");
 	}
 });
