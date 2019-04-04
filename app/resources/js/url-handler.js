@@ -7,6 +7,7 @@ $(document).ready(function() {
 	} else if (!(getQueryStringValue("example") == "")) {
 		var type = getQueryStringValue("example");
 		var url = window.location.protocol + "//" + window.location.host + window.location.pathname + "/examples/" + type + ".cql";
+		console.log(url);
 		$.get(url, function(data) {
 			$("#statements").val(data);
 			$("#statements").css("height",($("#statements")[0].scrollHeight) + "px");
