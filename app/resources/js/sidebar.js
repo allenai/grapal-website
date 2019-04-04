@@ -1,8 +1,8 @@
 var url = window.location.protocol + "//" + window.location.host + window.location.pathname + "/examples";
-$.get('examples', function(data) {
+$.get(url, function(data) {
    $(data).find("li > a").each(function() {
    		var fileName = $(this).attr("href");
-		if (!(fileName == "/app/")) {
+		if (!(fileName == "/app//")) {
 			var a = document.createElement("p");
 			a.className = "list-group-item list-group-item-action bg-light";
 			var a_id = fileName.replace(".cql", "");
