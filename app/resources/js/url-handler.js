@@ -6,13 +6,14 @@ $(document).ready(function() {
 		$("#statements").css("height",($("#statements")[0].scrollHeight) + "px");
 	} else if (!(getQueryStringValue("example") == "")) {
 		var type = getQueryStringValue("example");
-		var json = $.getJSON("examples.json", function(json) {
-			$("#statements").val(json[type]["query"]);
+		$.get("examples/" + type + ".cql", function(data) {
+			$("#statements").val(data);
 			$("#statements").css("height",($("#statements")[0].scrollHeight) + "px");
-			return false;
 		});
+
 	}
 });
+
 function getQueryStringValue (key) {  
 	var stmt = decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
 	return stmt;

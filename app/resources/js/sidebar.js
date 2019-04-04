@@ -1,21 +1,28 @@
-$(document).ready(function() {
-	$.getJSON("examples.json", function(json) {
-		var keys = Object.keys(json);
-		keys.forEach(function(element) {
+$.get('examples', function(data) {
+   $(data).find("li > a").each(function() {
+   		var fileName = $(this).attr("href");
+		if (!(fileName == "/app/")) {
 			var a = document.createElement("p");
 			a.className = "list-group-item list-group-item-action bg-light";
-			a.id = element;
-			a.innerHTML = json[element]["name"];
+			var a_id = fileName.replace(".cql", "");
+			a.id = a_id;
+			a.innerHTML = format_sidebar_strs(a_id);
 			$("#query-list").append(a);
-			$("#" + element).click(function(e) {
-				$.getJSON("examples.json", function(json) {
-					$("#statements").val(json[element]["query"]);
+			$("#" + a_id).click(function(e) {
+				$.get("examples/" + fileName, function(data) {
+					console.log(data);
+					$("#statements").val(data);
 					$("#statements").css("height",($("#statements")[0].scrollHeight) + "px");
-					var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?example=' + element;
+					var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?example=' + a_id;
 					window.history.pushState({ path: newurl }, '', newurl);
-					document.getElementById('ascii-table').innerHTML = "";		
+					document.getElementById('ascii-table').innerHTML = "";
 				});
 			});
-		});
-	});
+		}
+    });
 });
+
+function format_sidebar_strs(data) {
+	data = data.charAt(0).toUpperCase() + data.slice(1);
+	return data.replace("_", " ");
+}

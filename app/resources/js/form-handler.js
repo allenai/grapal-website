@@ -1,5 +1,5 @@
 function load(items) {
-    var output = AsciiTable.table(items)
+    var output = AsciiTable.table(items, $("#body").width() / 10);
     document.getElementById('ascii-table').innerHTML = output
  }
 
