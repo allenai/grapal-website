@@ -1,29 +1,21 @@
-var url = window.location.protocol + "//" + window.location.host + window.location.pathname + "/examples";
-console.log(url);
-$.get("https://github.com/allenai/grapal-website/blob/master/app/examples/", function(data) {
-   $(data).find("li > a").each(function() {
-   		var fileName = $(this).attr("href");
-		if (!(fileName == "/app//")) {
+$(document).ready(function() {
+	$.getJSON("examples.json", function(json) {
+		var keys = Object.keys(json);
+		keys.forEach(function(element) {
 			var a = document.createElement("p");
 			a.className = "list-group-item list-group-item-action bg-light";
-			var a_id = fileName.replace(".cql", "");
-			a.id = a_id;
-			a.innerHTML = format_sidebar_strs(a_id);
+			a.id = element;
+			a.innerHTML = json[element]["name"];
 			$("#query-list").append(a);
-			$("#" + a_id).click(function(e) {
-				$.get("https://github.com/allenai/grapal-website/blob/master/app/examples/" + fileName, function(data) {
-					$("#statements").val(data);
+			$("#" + element).click(function(e) {
+				$.getJSON("examples.json", function(json) {
+					$("#statements").val(json[element]["query"]);
 					$("#statements").css("height",($("#statements")[0].scrollHeight) + "px");
-					var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?example=' + a_id;
+					var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?example=' + element;
 					window.history.pushState({ path: newurl }, '', newurl);
-					document.getElementById('ascii-table').innerHTML = "";
+					document.getElementById('ascii-table').innerHTML = "";		
 				});
 			});
-		}
-    });
+		});
+	});
 });
-
-function format_sidebar_strs(data) {
-	data = data.charAt(0).toUpperCase() + data.slice(1);
-	return data.replace("_", " ");
-}
