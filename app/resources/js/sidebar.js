@@ -1,6 +1,6 @@
 var url = window.location.protocol + "//" + window.location.host + window.location.pathname + "/examples";
 console.log(url);
-$.get("https://allenai.github.io/grapal-website/app/examples/", function(data) {
+$.get("https://github.com/allenai/grapal-website/blob/master/app/examples/", function(data) {
    $(data).find("li > a").each(function() {
    		var fileName = $(this).attr("href");
 		if (!(fileName == "/app//")) {
@@ -11,7 +11,7 @@ $.get("https://allenai.github.io/grapal-website/app/examples/", function(data) {
 			a.innerHTML = format_sidebar_strs(a_id);
 			$("#query-list").append(a);
 			$("#" + a_id).click(function(e) {
-				$.get("https://allenai.github.io/grapal-website/app/examples/" + fileName, function(data) {
+				$.get("https://github.com/allenai/grapal-website/blob/master/app/examples/" + fileName, function(data) {
 					$("#statements").val(data);
 					$("#statements").css("height",($("#statements")[0].scrollHeight) + "px");
 					var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?example=' + a_id;
