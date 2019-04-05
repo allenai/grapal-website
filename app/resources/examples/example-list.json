@@ -1,0 +1,10 @@
+{
+	"files": [
+		"canonical_entity.cql",
+		"citation_metrics.cql"
+		"experts.cql",
+		"intersecting_entities.cql",
+		"scientific_concepts.cql",
+		"shortest_path.cql"
+	]
+}

@@ -6,23 +6,23 @@
 
 	"experts": {
 		"name": "Find experts",
-		"query": "MATCH (a:Author)-[:AUTHORS]->(p:Paper), \n (p)-[:MENTIONS]->(:Entity {name: 'Relationship extraction'}) \n WHERE p.year > 2013 \n WITH a, count(p) as cp \n RETURN a, cp \n ORDER BY cp DESC"
+		"query": "MATCH (a:Author)-[:AUTHORS]->(p:Paper), \n (p)-[:MENTIONS]->(:Entity {name: 'Relationship extraction'}) \n WHERE p.year > 2013 \n WITH a, count(p) as cp \n RETURN a.first, a.last, cp \n ORDER BY cp DESC"
 	},
 	"intersecting-entities": {
 		"name": "Intersecting entities",
-		"query": "MATCH (p:Paper)-[:MENTIONS]->(e1:Entity {name: 'Constraint programming'}), \n (p:Paper)-[:MENTIONS]->(e2:Entity {name: 'Natural language processing'}) \n RETURN p"
+		"query": "MATCH (p:Paper)-[:MENTIONS]->(e1:Entity {name: 'Constraint programming'}), \n (p:Paper)-[:MENTIONS]->(e2:Entity {name: 'Natural language processing'}) \n RETURN p.title"
 	},
 	"canonical-entity": {
 		"name": "Canonical entity",
-		"query": "MATCH (e:Entity) \n WHERE e.name =~ '(?i)relationship extraction' \n RETURN e"
+		"query": "MATCH (e:Entity) \n WHERE e.name =~ '(?i)relationship extraction' \n RETURN e.name"
 	},
 	"scientific-concepts": {
 		"name": "Scientific concepts",
-		"query": "MATCH path=shortestPath((er:Entity {name: 'Estrogen Receptors'})-[:WITH_ENTITY*0..15]-(ar:Entity {name: 'Arimidex'})) \n WITH nodes(path) as ns UNWIND ns as n \n MATCH (n)-[:WITH_ENTITY]->(e0:Entity), \n (n)-[:WITH_ENTITY]->(e1:Entity), \n (n)-[:WITH_RELATIONSHIP]->(r:Relation) \n RETURN e0, r, e1"
+		"query": "MATCH path=shortestPath((er:Entity {name: 'Estrogen Receptors'})-[:WITH_ENTITY*0..15]-(ar:Entity {name: 'Arimidex'})) \n WITH nodes(path) as ns UNWIND ns as n \n MATCH (n)-[:WITH_ENTITY]->(e0:Entity), \n (n)-[:WITH_ENTITY]->(e1:Entity), \n (n)-[:WITH_RELATIONSHIP]->(r:Relation) \n RETURN e0.name, r.relation_type, e1.name"
 	},
 	"citation-metrics": {
 		"name": "Citation metrics",
-		"query": "MATCH (p1:Paper)-[:APPEARS_IN]->(naacl:Venue), \n (p2:Paper)-[:APPEARS_IN]->(cvpr:Venue), \n path=((p1)-[:CITES]->(p2)) \n WHERE naacl.text =~ '.*NAACL.*' \n AND cvpr.text =~ '.*CVPR.*' \n RETURN count(path)"
+		"query": "MATCH (p1:Paper)-[:APPEARS_IN]->(naacl:Venue), \n (p2:Paper)-[:APPEARS_IN]->(cvpr:Venue), \n path=((p1)-[:CITES]->(p2)) \n WHERE naacl.text =~ '.*NAACL.*' \n AND cvpr.text =~ '.*CVPR.*' \n RETURN count(distinct path)"
 	}
 
 }
