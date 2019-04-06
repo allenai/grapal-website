@@ -74,7 +74,7 @@ $(document).ready(function() {
 });
 
 $("#statements").on("change keyup paste", function() {
-    var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?query=' + $("#statements")[0]['value'];
+    var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?query=' + $("#statements")[0]['value'].split("\n").join(" ");
 	window.history.pushState({ path: newurl }, '', newurl);
 	if ($("#statements")[0]['value'] === "")  {
 		$('#ascii-table').empty();
