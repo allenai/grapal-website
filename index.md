@@ -7,6 +7,8 @@ GrapAL (**Grap**h database of **A**cademic **L**iterature) is a tool to query th
 
 The easiest way to get started with GrapAL is through the interactive browser, which you can use to write and visualize queries.
 
+We also have a handy query loader that can be used to load, share, and save the results of queries. Find it at https://allenai.github.io/grapal-website/app/
+
 ![Visual of the shortest paths between Swabha Swayamdipta and Regina Barzilay](https://allenai.github.io/grapal-website/assets/images/browser-example.png)
 
 For starters, copy and paste the following query into the [interactive browser](https://grapal.allenai.org:7473/browser):
