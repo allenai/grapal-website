@@ -41,7 +41,6 @@ overview of the schema where * indicates indexed property.
   - confidence: float representing confidence of an Entity in a Paper
   - salience: float representing salience of an Entity in a Paper
 - **MENTIONS_RELATION**: relationship between a Paper and a Relation_Instance
-  - text: string of a venue
 - **WITH_ENTITY**: relationship between a Relation_Instance and an Entity
 - **WITH_RELATIONSHIP**: relationship between a Relation_Instance and a Relation_Type
 
